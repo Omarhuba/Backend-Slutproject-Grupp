@@ -15,9 +15,9 @@ app.use(morgan('dev'))
 
 
 
-const port = process.env.PORT || 5000
-app.listen(port, () => {
-    consol.log('Server listening on port '+ port)
+const PORT = process.env.PORT || 5000
+app.listen(PORT, () => {
+    consol.log(`SERVER STARTED ON PORT: ${PORT}`)
 })
 
 
