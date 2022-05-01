@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
+
 const { readdirSync } = require('fs')
+
 
 const morgan = require('morgan')
 require('dotenv').config()
@@ -20,7 +22,9 @@ app.use(session({
 
 
 // routers
+
 readdirSync('./routes').map((route) => app.use('/api', require(`./routes/${route}`)))
+
 
 
 

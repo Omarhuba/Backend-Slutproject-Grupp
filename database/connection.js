@@ -1,19 +1,15 @@
+require("dotenv").config();
+const mongoose = require("mongoose");
 
-require('dotenv').config()
-const mongoose = require('mongoose')
-
-const {DATABASE_URL} = process.env
+const { DATABASE_URL } = process.env;
 
 const byggfirmaDB = async () => {
+  await mongoose.connect(`${DATABASE_URL}byggfirma`);
 
-await mongoose.connect(`${DATABASE_URL}byggfirma`)
-
-console.log('connected')
-
-
-}
+  console.log("connected");
+};
 
 // Call function here to avoid calling in every indv. pages.
-byggfirmaDB()
+byggfirmaDB();
 
-module.exports = {byggfirmaDB}
+module.exports = { byggfirmaDB };
