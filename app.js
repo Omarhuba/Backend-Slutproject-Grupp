@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const { register } = require('./controllers/auth/resisterControll')
 const {login} = require('./controllers/auth/loginControll')
+const {createTask, allTask} = require('./controllers/taskControllers')
 
 const morgan = require('morgan')
 require('dotenv').config()
@@ -22,6 +23,7 @@ app.use(session({
 // routers
 app.post('/register', register)
 app.post('/login', login)
+app.post('/task', createTask)
 
 
 
