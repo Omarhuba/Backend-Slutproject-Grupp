@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
-const { register } = require('./controllers/auth/resisterControll')
-const {login} = require('./controllers/auth/loginControll')
+const { readdirSync } = require('fs')
 
 const morgan = require('morgan')
 require('dotenv').config()
@@ -19,9 +18,11 @@ app.use(session({
 
 // websocket
 
+
 // routers
-app.post('/register', register)
-app.post('/login', login)
+readdirSync('./routes').map((route) => app.use('/api', require(`./routes/${route}`)))
+
+
 
 
 
