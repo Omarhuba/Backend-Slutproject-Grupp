@@ -5,18 +5,18 @@
     ??? in backend or in frontend ???
 */
 
-const {Users}= require('../../models/userModel')
+const {User}= require('../../models/userModel')
  require('../../database/connection')
 const jwt = require('jsonwebtoken')
 
 const register = async (req, res) => {
 
     const { name, address, email, password,role } = req.body
-    const userFound = await Users.findOne({email}).exec()
+    const userFound = await User.findOne({email}).exec()
     try {
         if (!userFound) {
 
-        const user =  await new Users({
+            const user = await new User({
                 name,
                 address,
                 email,
@@ -35,7 +35,7 @@ const register = async (req, res) => {
 
 
                     // Exclude user password before sending json response
-          const newUser = await Users.findOne({ _id: user._id }).select("-password")
+          const newUser = await User.findOne({ _id: user._id }).select("-password")
 
           /* ??? req.session ???
               session code goes here.......

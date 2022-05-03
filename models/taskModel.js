@@ -1,39 +1,49 @@
-const mongoose = require("mongoose");
+
+const mongoose = require('mongoose')
 
 const taskSchema = new mongoose.Schema(
   {
     title: {
       type: String,
       trim: true,
-      required: true,
+      unique:true,
+      required: true
     },
     desc: {
       type: String,
-      trim: true,
+      trim: true
     },
     done: {
       type: Boolean,
-      required: true,
+      required: true
     },
     image: {
       data: Buffer,
-      contentType: String,
+      contentType: String
     },
-    tasksInProgress:{
-        type: Array, default:[]
+    tasksInProgress: {
+      type: Array, default: ['Task is in progress!']
     },
     worker_id: {
-      type: Number,
+      type: String
     },
     client_id: {
-      type: Number,
+      type: String
     },
+
+    finishedAt:{
+      type: String,
+    }
+
+    // messages: {
+    //   type: Array, default: ['Hi! Task has been!']
+    // }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
-);
+)
 
-const Task = mongoose.model("Task", taskSchema);
+const Task = mongoose.model('Task', taskSchema)
 
-module.exports = { Task };
+module.exports = { Task}
