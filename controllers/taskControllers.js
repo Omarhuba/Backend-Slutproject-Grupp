@@ -7,11 +7,13 @@ const { User } = require("../models/userModel");
 const createTask = async (req, res) => {
   try {
     const { title, desc, done, email, client_id,finishedAt } = req.body;
-    const user = await User.findOne({email}).exec()
+    const token = req.header.token
+    console.log(token);
+    const user = await User.findOne({token}).exec()
     const task = await new Task({
       title,
-        desc,
-        done,
+      desc,
+      done,
       worker_id:user._id,
       client_id,
       finishedAt
