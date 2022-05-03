@@ -1,37 +1,30 @@
+
 require("../database/connection");
 const { Task } = require("../models/taskModel");
+const { User } = require("../models/userModel");
+
 
 const createTask = async (req, res) => {
-  const { title, desc, done, worker_id, client_id } = req.body;
-  const newTask = async () => {
-    try {
-      const task = await new Task({
-        title,
+  try {
+    const { title, desc, done, email, client_id,finishedAt } = req.body;
+    const user = await User.findOne({email}).exec()
+    const task = await new Task({
+      title,
         desc,
         done,
-        worker_id,
-        client_id,
-      });
-      await task.save();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  newTask();
-  res.json({
-    title,
-    desc,
-    done,
-    worker_id,
-    client_id,
-    msg: "new task is created!",
-  });
+      worker_id:user._id,
+      client_id,
+      finishedAt
+
+    })
+
+    await task.save();
+    res.json({ task , message:'A new task created!'})
+  }catch(error){
+    res.status(400).json(error.message)
+  }
 };
 
-const allTask = async () => {
-  const task = await Task.find();
-  console.log(task);
-};
-allTask();
+
 
 module.exports = { createTask };

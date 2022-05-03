@@ -1,5 +1,5 @@
 
-const { Users } = require('../../models/userModel')
+const { User } = require('../../models/userModel')
 
 require('../../database/connection')
 const jwt = require('jsonwebtoken')
@@ -9,7 +9,7 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
       // check if user with the email above exist
-        let user = await Users.findOne({ email }).exec();
+        let user = await User.findOne({ email }).exec();
         if (!user) throw new Error('User not found!')
 
       // compare password before generating token
@@ -28,7 +28,7 @@ const login = async (req, res) => {
           const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' })
 
               // Exclude user password before sending json response
-              const userData = await Users.findOne({ _id: user._id }).select("-password")
+              const userData = await User.findOne({ _id: user._id }).select("-password")
 
               /* ??? req.session ???
                   session code goes here.......

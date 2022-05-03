@@ -8,6 +8,7 @@
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.1",
+    "mongoose-seeder": "^1.2.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
     "socket.io": "^4.5.0"
@@ -19,7 +20,7 @@
     "nodemon": "^2.0.15"
   },
   "scripts": {
-    "seed": "node database/seed.js",
+    "seed": "node seeders/seeder.js",
     "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
