@@ -2,10 +2,6 @@
 const { Message } = require('../models/messageModel')
 const {User} = require('../models/userModel')
 const {Task} = require('../models/taskModel')
-require('../database/connection')
-
-
-
 
 const createMessage = async (req, res) => {
     try {

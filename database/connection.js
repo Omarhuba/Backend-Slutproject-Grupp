@@ -10,6 +10,6 @@ const byggfirmaDB = async () => {
 };
 
 // Call function here to avoid calling in every indv. pages.
-byggfirmaDB();
+// byggfirmaDB();
 
 module.exports = { byggfirmaDB };

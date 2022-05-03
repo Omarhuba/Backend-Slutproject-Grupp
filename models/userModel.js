@@ -39,8 +39,6 @@ const usersSchema = new mongoose.Schema({
     required: true
   }
 
-  // ??? possible or need to create a simple userID?
-
 },
   {
    timestamps:false
