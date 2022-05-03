@@ -1,7 +1,5 @@
 
 const { User } = require('../../models/userModel')
-
-require('../../database/connection')
 const jwt = require('jsonwebtoken')
 
 const login = async (req, res) => {

@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
-
 const { readdirSync } = require('fs')
+const {byggfirmaDB}= require("./database/connection")
 
 
 const morgan = require('morgan')
@@ -32,6 +32,7 @@ readdirSync('./routes').map((route) => app.use('/api', require(`./routes/${route
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
+    byggfirmaDB();
     console.log(`SERVER STARTED ON PORT: ${PORT}`)
 })
 

@@ -1,12 +1,5 @@
-/*
-    Users will be able to login themselves, if they are created by admin.
-    Admin needs resource to create users.
-    It needs restrictions codes of user creation unless user role is admin.
-    ??? in backend or in frontend ???
-*/
 
 const {User}= require('../../models/userModel')
- require('../../database/connection')
 const jwt = require('jsonwebtoken')
 
 const register = async (req, res) => {
@@ -37,9 +30,6 @@ const register = async (req, res) => {
                     // Exclude user password before sending json response
           const newUser = await User.findOne({ _id: user._id }).select("-password")
 
-          /* ??? req.session ???
-              session code goes here.......
-           */
                     res.json({newUser ,token, message: 'User created successfully!'})
                  }
 
