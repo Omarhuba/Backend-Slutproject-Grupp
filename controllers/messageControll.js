@@ -5,9 +5,8 @@ const {Task} = require('../models/taskModel')
 
 const createMessage = async (req, res) => {
     try {
-        const { title, content } = req.body;
-        const token = req.header.token
-        const senders = await User.findOne({ token }).exec()
+        const { title, email, content } = req.body;
+        const senders = await User.findOne({ email}).exec()
             console.log('akjdhöksjfhaöskdj'+ senders);
             const tasks = await Task.findOne({ title }).exec()
             console.log(tasks);
@@ -39,9 +38,7 @@ const getMessageByTask = async (req, res, next) => {
         res.json(tasksMessages)
         // console.log(messagesIDs)
 
-
-
-        next()
+     next()
 
 
     }catch(error){
@@ -50,5 +47,7 @@ const getMessageByTask = async (req, res, next) => {
 
 
 }
+
+
 
   module.exports = {createMessage, getMessageByTask}
