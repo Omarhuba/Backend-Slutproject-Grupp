@@ -34,6 +34,35 @@ const getAllClients = async (req, res) => {
         res.status(400).json(error.message);;
     }
 
+}
+
+const updateUser = async (req, res) => {
+    try {
+        const {inLoggedUser, name, newEmail, ad } = req.body
+        // const {  } = req.user
+        console.log("Token " + req.headers.token)
+
+        const filter = inLoggedUser
+
+        const update ={
+            name: name,
+            email: newEmail,
+        }
+
+        await User.findOneAndUpdate(filter, update, {
+            new: true,
+            upsert: true, // Make this update into an upsert
+            raw:true
+        })
+
+    //    const  newUser = await User.findOne({email:update.email})
+
+        res.json({mgs:'User info updated!'})
+        // console.log(newUser)
+
+    } catch (error)
+    { res.status(400).json(error.message); }
+
 
 }
 
@@ -41,4 +70,4 @@ const getAllClients = async (req, res) => {
 
 
 
-module.exports={getAllUser, getAllWorkers, getAllClients}
+module.exports={getAllUser, getAllWorkers, getAllClients,updateUser}

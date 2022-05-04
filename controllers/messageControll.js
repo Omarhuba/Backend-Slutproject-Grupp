@@ -48,6 +48,25 @@ const getMessageByTask = async (req, res, next) => {
 
 }
 
+const getALLmessages = async (req, res, next) => {
+
+    try {
+
+    const messages = await Message.find({}).exec()
+
+    res.json(messages)
 
 
-  module.exports = {createMessage, getMessageByTask}
+     next()
+
+
+    }catch(error){
+        res.status(400).json(error.message)
+    }
+
+
+}
+
+
+
+  module.exports = {createMessage, getMessageByTask, getALLmessages}

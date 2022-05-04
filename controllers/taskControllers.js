@@ -36,10 +36,12 @@ const getAllTasks = async (req, res) => {
 
 }
 
-const getTaskByWorkers = async (req, res) => {
-  try{
-      const allTasks = await Task.find({}).exec()
-      res.json(allTasks)
+// ???
+const getTaskByWorker = async (req, res) => {
+  try {
+    const id = req.params.id
+      const tasks = await Task.find({worker_id:id}).exec()
+      res.json(tasks)
   } catch (error)
   {
       res.status(400).json(error.message);;
@@ -51,4 +53,7 @@ const getTaskByWorkers = async (req, res) => {
 
 
 
-module.exports = { createTask, getAllTasks };
+
+
+
+module.exports = { createTask, getAllTasks,getTaskByWorker };
