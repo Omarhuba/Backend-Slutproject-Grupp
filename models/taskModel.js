@@ -21,8 +21,8 @@ const taskSchema = new mongoose.Schema(
       data: Buffer,
       contentType: String
     },
-    tasksInProgress: {
-      type: Array, default: ['Task is in progress!']
+    status: {
+      type: String, default:'Task is in progress!'
     },
     worker_id: {
       type: String

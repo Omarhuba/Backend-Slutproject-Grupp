@@ -5,18 +5,14 @@ const { User } = require("../models/userModel");
 
 const createTask = async (req, res) => {
   try {
-    const { title, desc, done, client_email, finishedAt } = req.body;
-    const token = req.header.token
-    console.log(token);
-    const user = await User.findOne({ token }).exec()
-    console.log('user'+user);
-    const client = await User.findOne({client_email}).exec()
-    console.log('client '  +client);
+    const { title, desc, done, workerEmail, clientEmail, finishedAt } = req.body;
+    const worker = await User.findOne({ email:workerEmail})
+    const client = await User.findOne({email:clientEmail})
     const task = await new Task({
       title,
       desc,
       done,
-      worker_id:user._id,
+      worker_id:worker._id,
       client_id:client._id,
       finishedAt
 
@@ -50,6 +46,8 @@ const getTaskByWorkers = async (req, res) => {
   }
 
 }
+
+
 
 
 

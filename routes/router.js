@@ -12,7 +12,7 @@ const { getAllUser, getAllWorkers, getAllClients } = require('../controllers/use
 // Post requests
 router.post('/register', register)
 router.post('/login', login)
-router.post('/task', createTask)
+router.post('/task',createTask)
 router.post('/message', createMessage)
 
 // Get requests

@@ -24,7 +24,6 @@ const login = async (req, res) => {
 
           // Generate token
           const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' })
-          const cookies = res.cookie('token', token);
 
               // Exclude user password before sending json response
               const userData = await User.findOne({ _id: user._id }).select("-password")
@@ -33,7 +32,7 @@ const login = async (req, res) => {
           //Send json response with particular data
 
             res.json({userData, token })
-            console.log(cookies);
+           
          }
 
     })
