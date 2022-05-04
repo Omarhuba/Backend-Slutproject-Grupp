@@ -1,2 +1,1 @@
-what...?
-lösning: asdfghjk.
+Q1. As sorting of task querry by individual user involved is also handled on frontend,  Should we need it in backend? Example : taskByWorker, taskByclient.

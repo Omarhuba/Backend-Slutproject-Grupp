@@ -34,10 +34,6 @@ const taskSchema = new mongoose.Schema(
     finishedAt:{
       type: String,
     }
-
-    // messages: {
-    //   type: Array, default: ['Hi! Task has been!']
-    // }
   },
   {
     timestamps: true
