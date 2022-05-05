@@ -38,13 +38,12 @@ const getAllClients = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
-
     try {
         const data = Object.keys(req.body)
-        const { id } = req.user
+        const { _id } = req.user
 
-        const user = await User.findById({ _id: id }).select("-password")
-       
+        const user = await User.findById({ _id}).select("-password")
+
         data.forEach(key => {
             if (key && key !== 'role') {
                 console.log(key);
@@ -53,8 +52,7 @@ const updateUser = async (req, res) => {
         })
         await user.save()
 
-
-        res.json({mgs:'User info updated!'})
+        res.json('User info updated!')
 
 
     } catch (error)

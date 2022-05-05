@@ -5,15 +5,15 @@ const {Task} = require('../models/taskModel')
 
 const createMessage = async (req, res) => {
     try {
-        const { title, email, content } = req.body;
-        const senders = await User.findOne({ email}).exec()
-            console.log('akjdhöksjfhaöskdj'+ senders);
+        const { title, content } = req.body;
+        const sender_id = req.user._id
+            console.log('akjdhöksjfhaöskdj'+ req.user);
             const tasks = await Task.findOne({ title }).exec()
             console.log(tasks);
             console.log('task'+ tasks);
 
     const message =  await new Message({
-        sender_id:senders._id,
+        sender_id,
         task_id:tasks._id.toString(),
         content
 
@@ -33,20 +33,16 @@ const getMessageByTask = async (req, res, next) => {
     try {
         const id = req.params.id
         const tasksMessages = await Message.find({task_id:id}).exec()
-        // const messagesIDs = await Messages.find({})
-
         res.json(tasksMessages)
-        // console.log(messagesIDs)
 
      next()
-
 
     }catch(error){
         res.status(400).json(error.message)
     }
 
-
 }
+
 
 const getALLmessages = async (req, res, next) => {
 
@@ -55,16 +51,11 @@ const getALLmessages = async (req, res, next) => {
     const messages = await Message.find({}).exec()
 
     res.json(messages)
-
-
-     next()
-
+        next()
 
     }catch(error){
         res.status(400).json(error.message)
     }
-
-
 }
 
 
