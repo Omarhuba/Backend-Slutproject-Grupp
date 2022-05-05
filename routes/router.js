@@ -7,6 +7,7 @@ const { login } = require('../controllers/auth/loginControll')
 const { createTask,getAllTasks,getTaskByWorker } = require('../controllers/taskControllers')
 const { createMessage, getMessageByTask,getALLmessages } = require('../controllers/messageControll')
 const { getAllUser, getAllWorkers, getAllClients, updateUser } = require('../controllers/userControllers')
+const { requireAuthAdmin, requireAuthUser} = require('../middleware/auth')
 
 
 
@@ -26,7 +27,7 @@ router.get('/messages', getALLmessages)
 router.get('/task/:id/', getMessageByTask)
 
 // Update requests
-router.patch('/userUpdate', updateUser)
+router.patch('/userUpdate', requireAuthUser ,updateUser)
 
 
 
