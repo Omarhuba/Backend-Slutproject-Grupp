@@ -38,18 +38,16 @@ const getAllClients = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const {inLoggedUser, name, newEmail, ad } = req.body
-        // const {  } = req.user
-        console.log("Token " + req.headers.token)
-
-        const filter = inLoggedUser
+        const { name, newEmail,  } = req.body
+        const { userData } = req.user
+        console.log(userData);
 
         const update ={
-            name: name,
+            userName: name,
             email: newEmail,
         }
 
-        await User.findOneAndUpdate(filter, update, {
+        await User.findOneAndUpdate(userData, update, {
             new: true,
             upsert: true, // Make this update into an upsert
             raw:true

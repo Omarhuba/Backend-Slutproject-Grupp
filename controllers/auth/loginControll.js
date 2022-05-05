@@ -28,14 +28,14 @@ const login = async (req, res) => {
               // Exclude user password before sending json response
               const userData = await User.findOne({ _id: user._id }).select("-password")
 
-          req.session.user = {
-            userName: userData.name,
-            email: userData.email,
-            id:userData._id
+          // req.session.user = {
+          //   name: userData.name,
+          //   email: userData.email,
+          //   id:userData._id
 
-          }
+          // }
 
-          console.log(req.session.user)
+          // console.log(req.session.user)
 
           //Send json response with particular data
 
