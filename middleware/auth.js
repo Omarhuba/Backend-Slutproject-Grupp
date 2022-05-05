@@ -10,7 +10,7 @@ const requireAuthUser = (req,res,next)=>{
         const userData = jwt.verify(token, process.env.JWT_SECRET)
 
         req.user = {
-            userData
+            id:userData._id
         }
         next()
 

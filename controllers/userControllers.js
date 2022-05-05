@@ -1,5 +1,6 @@
 
-const {User} = require('../models/userModel')
+const { User } = require('../models/userModel')
+
 
 const getAllUser = async (req, res) => {
    try{
@@ -37,26 +38,24 @@ const getAllClients = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
+
     try {
-        const { name, newEmail,  } = req.body
-        const { userData } = req.user
-        console.log(userData);
+        const data = Object.keys(req.body)
+        const { id } = req.user
 
-        const update ={
-            userName: name,
-            email: newEmail,
-        }
-
-        await User.findOneAndUpdate(userData, update, {
-            new: true,
-            upsert: true, // Make this update into an upsert
-            raw:true
+        const user = await User.findById({ _id: id }).select("-password")
+       
+        data.forEach(key => {
+            if (key && key !== 'role') {
+                console.log(key);
+                user[key] = req.body[key];
+            }
         })
+        await user.save()
 
-    //    const  newUser = await User.findOne({email:update.email})
 
         res.json({mgs:'User info updated!'})
-        // console.log(newUser)
+
 
     } catch (error)
     { res.status(400).json(error.message); }

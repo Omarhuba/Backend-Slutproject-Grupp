@@ -18,12 +18,12 @@ router.post('/task',createTask)
 router.post('/message', createMessage)
 
 // Get requests
-router.get('/users', getAllUser)
-router.get('/getWorkers', getAllWorkers)
-router.get('/getClients', getAllClients)
-router.get('/tasks', getAllTasks)
-router.get('/taskByWorker/:id', getTaskByWorker)
-router.get('/messages', getALLmessages)
+router.get('/users', requireAuthAdmin, getAllUser)
+router.get('/getWorkers', requireAuthAdmin, getAllWorkers)
+router.get('/getClients', requireAuthAdmin, getAllClients)
+router.get('/tasks', requireAuthAdmin, getAllTasks)
+router.get('/taskByWorker/:id', requireAuthAdmin, getTaskByWorker)
+router.get('/messages', requireAuthAdmin, getALLmessages)
 router.get('/task/:id/', getMessageByTask)
 
 // Update requests
