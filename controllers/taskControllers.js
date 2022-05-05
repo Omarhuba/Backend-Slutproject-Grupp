@@ -6,12 +6,12 @@ const { User } = require("../models/userModel");
 const createTask = async (req, res) => {
   try {
     const { title, desc, done, clientEmail, finishedAt } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     const { id } = req.user
     console.log(req.user)
 
    const user = await User.findById({ _id: id }).select("-password")
-    console.log('USER ', user)
+    // console.log('USER ', user)
     const client = await User.findOne({email:clientEmail})
     const task = await new Task({
       title,
