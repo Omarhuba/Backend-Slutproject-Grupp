@@ -11,11 +11,13 @@ const { requireAuthAdmin, requireAuthUser,requireAuthAdminWorker} = require('../
 
 
 
+
 // Post requests
 router.post('/register', register)
 router.post('/login', login)
 router.post('/task',requireAuthAdminWorker,createTask)
 router.post('/message',requireAuthUser, createMessage)
+
 
 // Get requests
 router.get('/users', requireAuthAdmin, getAllUser)
@@ -25,6 +27,8 @@ router.get('/tasks', requireAuthAdmin, getAllTasks)
 router.get('/taskByWorker/:id', requireAuthUser, getTaskByWorker)
 router.get('/messages', requireAuthAdmin, getALLmessages)
 router.get('/task/:id/', getMessageByTask)
+
+
 
 // Update requests
 router.patch('/userUpdate', requireAuthUser ,updateUser)

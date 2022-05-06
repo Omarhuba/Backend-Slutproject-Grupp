@@ -5,15 +5,19 @@ const {Task} = require('../models/taskModel')
 
 const createMessage = async (req, res) => {
     try {
+
         const { title, content } = req.body;
         const sender_id = req.user._id
             console.log('akjdhöksjfhaöskdj'+ req.user);
+
             const tasks = await Task.findOne({ title }).exec()
             console.log(tasks);
             console.log('task'+ tasks);
 
     const message =  await new Message({
+
         sender_id,
+
         task_id:tasks._id.toString(),
         content
 
