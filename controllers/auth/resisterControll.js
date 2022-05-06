@@ -26,9 +26,7 @@ const register = async (req, res) => {
                 } else {
                     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' })
 
-
-                    // Exclude user password before sending json response
-          const newUser = await User.findOne({ _id: user._id }).select("-password")
+            const newUser = await User.findOne({ _id: user._id }).select("-password")
 
                     res.json({newUser ,token, message: 'User created successfully!'})
                  }
@@ -36,7 +34,7 @@ const register = async (req, res) => {
             })
 
         } else {
-            // throw new Error ('Forbidden!')
+
            throw new Error ('User already exist!')
         }
 
