@@ -22,7 +22,6 @@ const createTask = async (req, res) => {
     const task = await new Task({
       title,
       desc,
-      done,
       image:originalname,
       worker_id:user._id,
       client_id:client._id,
@@ -64,15 +63,15 @@ const getTaskByWorker = async (req, res) => {
 
 const updateTask = async (req, res)=>{
   try {
-    const { title, status } = req.body
-
+    let { title, status } = req.body
+    status = status.toLowerCase()
     console.log(status)
 
     const task = await Task.findOne({ title })
 
-    if (status == 'Done') {
-      task.status = req.body.status
-    } 
+    if (status == 'done') {
+      task.status = status
+    }
 
     console.log('hhhhhhhhhh', task);
 
