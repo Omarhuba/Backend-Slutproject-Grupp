@@ -1,0 +1,35 @@
+[
+    {
+        "name": "admin",
+        "address": {
+                "street": "tokivägen",
+                "city": "stockholm",
+                "zip": "123"
+        } ,
+        "email": "admin@gmail.com",
+        "password": "123",
+        "role":  "admin"
+    },
+    {
+        "name": "worker",
+        "address": {
+                "street": "tokivägen",
+                "city": "stockholm",
+                "zip": "123"
+        } ,
+        "email": "worker@gmail.com",
+        "password": "123",
+        "role":  "worker"
+    },
+    {
+        "name": "client",
+        "address": {
+                "street": "tokivägen",
+                "city": "stockholm",
+                "zip": "123"
+        } ,
+        "email": "client@gmail.com",
+        "password": "123",
+        "role":  "client"
+    }
+]

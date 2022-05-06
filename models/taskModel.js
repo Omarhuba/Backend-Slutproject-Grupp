@@ -13,10 +13,6 @@ const taskSchema = new mongoose.Schema(
       type: String,
       trim: true
     },
-    done: {
-      type: Boolean,
-      required: true
-    },
     image: {
       type: String,
 
