@@ -4,10 +4,11 @@ const router = express.Router()
 
 const { register } = require('../controllers/auth/resisterControll')
 const { login } = require('../controllers/auth/loginControll')
-const { createTask,getAllTasks,getTaskByWorker, deleteTask } = require('../controllers/taskControllers')
+const { createTask,getAllTasks,getTaskByWorker, deleteTask, updateTask  } = require('../controllers/taskControllers')
 const { createMessage, getMessageByTask,getALLmessages, deleteMessage } = require('../controllers/messageControll')
 const { getAllUser, getAllWorkers, getAllClients, updateUser, deleteUser } = require('../controllers/userControllers')
 const { requireAuthAdmin, requireAuthUser,requireAuthAdminWorker} = require('../middleware/auth')
+const {imageUpload} = require('../middleware/images')
 
 
 
@@ -15,7 +16,7 @@ const { requireAuthAdmin, requireAuthUser,requireAuthAdminWorker} = require('../
 // Post requests
 router.post('/register', register)
 router.post('/login', login)
-router.post('/task',requireAuthAdminWorker,createTask)
+router.post('/task',requireAuthAdminWorker,imageUpload,createTask)
 router.post('/message',requireAuthUser, createMessage)
 
 
@@ -32,6 +33,7 @@ router.get('/task/:id/', getMessageByTask)
 
 // Update requests
 router.patch('/userUpdate', requireAuthUser ,updateUser)
+router.patch('/taskUpdate', requireAuthAdminWorker ,updateTask)
 
 
 // Delete requests

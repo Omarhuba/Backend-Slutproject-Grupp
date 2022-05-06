@@ -8,15 +8,22 @@ const createTask = async (req, res) => {
     const { title, desc, done, clientEmail, finishedAt } = req.body;
     // console.log(req.body);
     const { id } = req.user
-    console.log(req.user)
+
+    let originalname = ''
+    if (req.file) {
+      originalname = req.file.originalname
+    }
+    console.log(req.file)
+
 
    const user = await User.findById({ _id: id }).select("-password")
-    // console.log('USER ', user)
+
     const client = await User.findOne({email:clientEmail})
     const task = await new Task({
       title,
       desc,
       done,
+      image:originalname,
       worker_id:user._id,
       client_id:client._id,
       finishedAt
@@ -55,6 +62,29 @@ const getTaskByWorker = async (req, res) => {
 }
 
 
+const updateTask = async (req, res)=>{
+  try {
+    const { title, status } = req.body
+
+    console.log(status)
+
+    const task = await Task.findOne({ title })
+
+    if (status == 'Done') {
+      task.status = req.body.status
+    } 
+
+    console.log('hhhhhhhhhh', task);
+
+    await task.save()
+
+      res.json('task is upadate!')
+  }catch(error){
+      res.status(400).json(error.message);
+  }
+}
+
+
 const deleteTask = async (req, res)=>{
   try{
       const {title} = req.body
@@ -69,5 +99,4 @@ const deleteTask = async (req, res)=>{
 
 
 
-
-module.exports = { createTask, getAllTasks,getTaskByWorker, deleteTask };
+module.exports = { createTask, getAllTasks,getTaskByWorker, deleteTask , updateTask  };
