@@ -1,7 +1,4 @@
 const jwt = require('jsonwebtoken')
-const {User} = require('../models/userModel')
-
-
 const { User } = require('../models/userModel')
 
 const requireAuthUser = async (req, res, next) => {
@@ -14,7 +11,7 @@ const requireAuthUser = async (req, res, next) => {
         const tokenData = jwt.verify(token, process.env.JWT_SECRET)
         const user = await User.findById({ _id: tokenData._id }).select('-password')
         req.user = user
-        
+
         next()
 
     } catch (error) {
@@ -39,14 +36,14 @@ const requireAuthAdminWorker = async (req,res,next)=>{
             throw new Error('Forbidden')
         }
         req.user = user
-      
+
         next()
 
     }catch(error){
         res.status(400).json( error.message)
     }
 }
-  
+
 
 
 const requireAuthAdmin = async (req,res,next)=>{
@@ -67,7 +64,7 @@ const requireAuthAdmin = async (req,res,next)=>{
             throw new Error('Forbidden')
         }
         req.user = user
-      
+
         next()
     } catch (error) {
         res.status(400).json(error.message)
