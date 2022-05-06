@@ -62,6 +62,20 @@ const getALLmessages = async (req, res, next) => {
     }
 }
 
+const deleteMessage = async (req, res)=>{
+    try{
+        const  id  = req.params.id
+        await Message.deleteOne({_id:id})
+
+        res.json('message deleted!')
+    }catch(error){
+        res.status(400).json(error.message);
+    }
+  }
 
 
-  module.exports = {createMessage, getMessageByTask, getALLmessages}
+
+
+
+
+  module.exports = {createMessage, getMessageByTask, getALLmessages, deleteMessage}

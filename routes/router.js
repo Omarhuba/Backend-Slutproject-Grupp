@@ -4,9 +4,9 @@ const router = express.Router()
 
 const { register } = require('../controllers/auth/resisterControll')
 const { login } = require('../controllers/auth/loginControll')
-const { createTask,getAllTasks,getTaskByWorker } = require('../controllers/taskControllers')
-const { createMessage, getMessageByTask,getALLmessages } = require('../controllers/messageControll')
-const { getAllUser, getAllWorkers, getAllClients, updateUser } = require('../controllers/userControllers')
+const { createTask,getAllTasks,getTaskByWorker, deleteTask } = require('../controllers/taskControllers')
+const { createMessage, getMessageByTask,getALLmessages, deleteMessage } = require('../controllers/messageControll')
+const { getAllUser, getAllWorkers, getAllClients, updateUser, deleteUser } = require('../controllers/userControllers')
 const { requireAuthAdmin, requireAuthUser,requireAuthAdminWorker} = require('../middleware/auth')
 
 
@@ -32,6 +32,12 @@ router.get('/task/:id/', getMessageByTask)
 
 // Update requests
 router.patch('/userUpdate', requireAuthUser ,updateUser)
+
+
+// Delete requests
+router.delete('/userDelete', requireAuthAdmin ,deleteUser)
+router.delete('/taskDelete', requireAuthAdminWorker, deleteTask)
+router.delete('/messageDelete/:id', requireAuthUser, deleteMessage)
 
 
 

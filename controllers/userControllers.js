@@ -55,14 +55,29 @@ const updateUser = async (req, res) => {
         res.json('User info updated!')
 
 
-    } catch (error)
-    { res.status(400).json(error.message); }
+    } catch (error){
+        res.status(400).json(error.message);
+    }
 
 
+}
+
+
+const deleteUser = async (req, res)=>{
+    try{
+        const {email} = req.body
+        await User.deleteOne({email})
+        // const userDelete = await User.find({}).exec()
+
+        // await userDelete.save()
+        res.json('user deleted!')
+    }catch(error){
+        res.status(400).json(error.message);
+    }
 }
 
 
 
 
 
-module.exports={getAllUser, getAllWorkers, getAllClients,updateUser}
+module.exports={getAllUser, getAllWorkers, getAllClients,updateUser, deleteUser}
