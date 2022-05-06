@@ -55,10 +55,19 @@ const getTaskByWorker = async (req, res) => {
 }
 
 
+const deleteTask = async (req, res)=>{
+  try{
+      const {title} = req.body
+      await Task.deleteOne({title})
+
+      res.json('task deleted!')
+  }catch(error){
+      res.status(400).json(error.message);
+  }
+}
 
 
 
 
 
-
-module.exports = { createTask, getAllTasks,getTaskByWorker };
+module.exports = { createTask, getAllTasks,getTaskByWorker, deleteTask };
