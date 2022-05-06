@@ -45,13 +45,12 @@ const usersSchema = new mongoose.Schema({
   })
 
 usersSchema.pre('save', function hashPassword(next) {
-  console.log("MIDDLEWARE HOOK FOR", this);
+
   if (!this.isModified('password')){
     return next()
   }
 
   bcrypt.hash(this.password, 12, (err, hashedPassword) => {
-    console.log("Password hashed");
     if (err)
       return next(err)
     this.password = hashedPassword

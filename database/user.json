@@ -2,12 +2,12 @@
     {
         "name": "admin",
         "address": {
-                "street": "tokivägen",
+                "street": "Årstaängsvägen",
                 "city": "stockholm",
-                "zip": "123"
+                "zip": "11743"
         } ,
-        "email": "admin@gmail.com",
-        "password": "123",
+        "email": "admin@example.com",
+        "password": "password",
         "role":  "admin"
     },
     {
@@ -15,10 +15,10 @@
         "address": {
                 "street": "tokivägen",
                 "city": "stockholm",
-                "zip": "123"
+                "zip": "12345"
         } ,
-        "email": "worker@gmail.com",
-        "password": "123",
+        "email": "worker@example.com",
+        "password": "password",
         "role":  "worker"
     },
     {
@@ -26,10 +26,10 @@
         "address": {
                 "street": "tokivägen",
                 "city": "stockholm",
-                "zip": "123"
+                "zip": "12347"
         } ,
-        "email": "client@gmail.com",
-        "password": "123",
+        "email": "client@example.com",
+        "password": "password",
         "role":  "client"
     }
 ]
