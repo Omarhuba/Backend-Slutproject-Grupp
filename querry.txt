@@ -1,1 +1,3 @@
 Q1. As sorting of task querry by individual user involved is also handled on frontend,  Should we need it in backend? Example : taskByWorker, taskByclient.
+Q2.Which dataTypes would be for image file(DB)?
+Q3. is upload image must required?

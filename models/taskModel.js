@@ -18,12 +18,12 @@ const taskSchema = new mongoose.Schema(
       required: true
     },
     image: {
-      data: Buffer,
-      contentType: String
+      type: String,
+
     },
-    status: {
-      type: String, default:'Task is in progress!'
-    },
+
+    status: { type: String, default: 'Working in progress!' },
+
     worker_id: {
       type: String
     },
