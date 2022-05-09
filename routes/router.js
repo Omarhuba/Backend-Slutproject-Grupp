@@ -14,7 +14,7 @@ const {imageUpload} = require('../middleware/images')
 
 
 // Post requests
-router.post('/register', register)
+router.post('/register',requireAuthAdmin, register)
 router.post('/login', login)
 router.post('/task',requireAuthAdminWorker,imageUpload,createTask)
 router.post('/message',requireAuthUser, createMessage)
@@ -33,7 +33,7 @@ router.get('/task/:id/', getMessageByTask)
 
 // Update requests
 router.patch('/userUpdate', requireAuthUser ,updateUser)
-router.patch('/taskUpdate', requireAuthAdminWorker ,updateTask)
+router.patch('/taskUpdate', requireAuthAdminWorker,imageUpload ,updateTask)
 
 
 // Delete requests
