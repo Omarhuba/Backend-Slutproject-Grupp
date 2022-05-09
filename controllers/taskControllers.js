@@ -1,7 +1,7 @@
 
 const { Task } = require("../models/taskModel");
 const { User } = require("../models/userModel");
-
+const { TaskNotFound } = require('../error')
 
 const createTask = async (req, res) => {
   try {
@@ -52,6 +52,7 @@ const getTaskByWorker = async (req, res) => {
   try {
     const id = req.params.id
     const tasks = await Task.find({ worker_id: id }).exec()
+    if(tasks.length < 1 ){ throw new TaskNotFound(id)}
     res.json(tasks)
   } catch (error) {
     res.status(400).json(error.message);;
@@ -65,7 +66,7 @@ const updateTask = async (req, res) => {
     let { title, status } = req.body
 
     const task = await Task.findOne({ title })
-
+    if(!task ){ throw new TaskNotFound(title)}
     if (status == 'finished') {
       task.status = status
       task.finishedAt = new Date()
@@ -89,8 +90,8 @@ const updateTask = async (req, res) => {
 const deleteTask = async (req, res) => {
   try {
     const { title } = req.body
-    await Task.deleteOne({ title })
-
+   const task =  await Task.findOneAndDelete({ title })
+    if(!task ){ throw new TaskNotFound(title)}
     res.json('task deleted!')
   } catch (error) {
     res.status(400).json(error.message);

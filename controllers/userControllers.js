@@ -19,7 +19,7 @@ const getAllWorkers = async (req, res) => {
         res.json(allWorker)
     } catch (error)
     {
-        res.status(400).json(error.message);;
+        res.status(400).json(error.message);
     }
 
 
