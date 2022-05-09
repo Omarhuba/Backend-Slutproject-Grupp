@@ -1,6 +1,7 @@
-const { JsonWebTokenError } = require('jsonwebtoken');
+
 const jwt = require('jsonwebtoken')
 const { User } = require('../models/userModel')
+const {Forbidden} = require('../error')
 
 const requireAuthUser = async (req, res, next) => {
     if (!req.headers.authorization) {
@@ -17,9 +18,7 @@ const requireAuthUser = async (req, res, next) => {
         next()
 
     } catch (error) {
-        if(error instanceof jwt.JsonWebTokenError){
-            res.status(401).json('Unauthorized!!!')
-        }
+       
         res.status(400).json(error.message)
     }
 }
@@ -38,16 +37,14 @@ const requireAuthAdminWorker = async (req,res,next)=>{
         console.log(user.role);
 
         if(  user.role == 'client'){
-            throw new Error('Forbidden')
+            throw new Forbidden()
         }
         req.user = user
 
         next()
 
     }catch(error){
-        if(error instanceof jwt.JsonWebTokenError){
-            res.status(401).json('Unauthorized!!!')
-        }
+
         res.status(401).json( error.message)
     }
 }
@@ -69,15 +66,13 @@ const requireAuthAdmin = async (req,res,next)=>{
         console.log(user.role);
 
         if (user.role != "admin") {
-            throw new Error('Forbidden')
+            throw new Forbidden()
         }
         req.user = user
 
         next()
     } catch (error) {
-        if(error instanceof jwt.JsonWebTokenError){
-            res.status(401).json('Unauthorized!!!')
-        }
+
         res.status(400).json(error.message)
 
     }
