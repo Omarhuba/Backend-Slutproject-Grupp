@@ -7,13 +7,15 @@ class InvalidCredentials extends byggFirmaError{
     this.errorCode = 403
   }
 }
-class Unauthorized extends byggFirmaError{
-  constructor(){
-    super()
-    this.message = `Unauthorized`
-    this.errorCode = 401
-  }
-}
+
+// class Unauthorized extends byggFirmaError{
+//   constructor(){
+//     super()
+//     this.message = `Unauthorized`
+//     this.errorCode = 401
+//   }
+// }
+
 class Forbidden extends byggFirmaError{
   constructor(){
     super()
@@ -22,13 +24,13 @@ class Forbidden extends byggFirmaError{
   }
 }
 
-class TokenExpired extends byggFirmaError{
-  constructor(){
-    super()
-    this.message = `Token expired, please log in again`
-    this.errorCode = 401
-  }
-}
+// class TokenExpired extends byggFirmaError{
+//   constructor(){
+//     super()
+//     this.message = `Token expired, please log in again`
+//     this.errorCode = 401
+//   }
+// }
 
 class TaskNotFound extends byggFirmaError{
   constructor(_id){
@@ -38,13 +40,15 @@ class TaskNotFound extends byggFirmaError{
   }
 }
 
-class MissingHeader extends byggFirmaError{
-  constructor(){
-    super()
-    this.message = `Content-Type header is missing`
-    this.errorCode = 400
-  }
-}
+// class MissingHeader extends byggFirmaError{
+//   constructor(){
+//     super()
+//     this.message = `Content-Type header is missing`
+//     this.errorCode = 400
+//   }
+// }
+
+// FINDDDDDD....
 class InvalidFile extends byggFirmaError{
   constructor(message){
     super()
@@ -52,6 +56,8 @@ class InvalidFile extends byggFirmaError{
     this.errorCode = 400
   }
 }
+
+// FINNNDDDDD....
 class FileExists extends byggFirmaError{
   constructor(fileName){
     super()
@@ -63,11 +69,11 @@ class FileExists extends byggFirmaError{
 module.exports = {
   byggFirmaError,
   InvalidCredentials,
-  Unauthorized,
-  TokenExpired,
+  // Unauthorized,
+  // TokenExpired,
   TaskNotFound,
   Forbidden,
-  MissingHeader,
+  // MissingHeader,
   InvalidFile,
   FileExists
 }
