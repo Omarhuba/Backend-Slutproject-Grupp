@@ -1,10 +1,12 @@
+const { JsonWebTokenError } = require('jsonwebtoken');
 const jwt = require('jsonwebtoken')
 const { User } = require('../models/userModel')
 
 const requireAuthUser = async (req, res, next) => {
     if (!req.headers.authorization) {
         console.log(req.headers.authorization);
-        return res.json({ msg: 'please logen first!' })
+        return res.status(400).json({ msg: 'please logen first!' })
+
     }
     try {
         const token = req.headers.authorization.replace("Bearer ", "")
@@ -15,6 +17,9 @@ const requireAuthUser = async (req, res, next) => {
         next()
 
     } catch (error) {
+        if(error instanceof jwt.JsonWebTokenError){
+            res.status(401).json('Unauthorized!!!')
+        }
         res.status(400).json(error.message)
     }
 }
@@ -24,7 +29,7 @@ const requireAuthUser = async (req, res, next) => {
 const requireAuthAdminWorker = async (req,res,next)=>{
     if(!req.headers.authorization){
         console.log(req.headers.authorization);
-        return res.json({ msg: 'please logen first!' })
+        return res.status(400).json({ msg: 'please logen first!' })
     }
     try {
         const token = req.headers.authorization.replace("Bearer ", "")
@@ -40,7 +45,10 @@ const requireAuthAdminWorker = async (req,res,next)=>{
         next()
 
     }catch(error){
-        res.status(400).json( error.message)
+        if(error instanceof jwt.JsonWebTokenError){
+            res.status(401).json('Unauthorized!!!')
+        }
+        res.status(401).json( error.message)
     }
 }
 
@@ -49,7 +57,7 @@ const requireAuthAdminWorker = async (req,res,next)=>{
 const requireAuthAdmin = async (req,res,next)=>{
     if(!req.headers.authorization){
         console.log(req.headers.authorization);
-        return res.json({msg: 'please logen first!'})
+        return res.status(400).json({msg: 'please logen first!'})
     }
     try {
         const token = req.headers.authorization.replace("Bearer ", "")
@@ -67,6 +75,9 @@ const requireAuthAdmin = async (req,res,next)=>{
 
         next()
     } catch (error) {
+        if(error instanceof jwt.JsonWebTokenError){
+            res.status(401).json('Unauthorized!!!')
+        }
         res.status(400).json(error.message)
 
     }
