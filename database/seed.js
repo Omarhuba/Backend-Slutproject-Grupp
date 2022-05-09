@@ -1,6 +1,6 @@
+
 const { User } = require('../models/userModel')
 const { byggfirmaDB } = require('./connection')
-
 
 const users = require('./user.json')
 

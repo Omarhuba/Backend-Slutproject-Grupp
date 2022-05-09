@@ -14,12 +14,13 @@ const taskSchema = new mongoose.Schema(
       trim: true
     },
     image: {
-      type: String,
+      type: Array, default:[]
 
     },
 
-    status: { type: String, default: 'Working in progress!' },
+    status: { type: String,enum:['work-in-progress','finished'], default: 'work-in-progress'},
 
+    // ??
     worker_id: {
       type: String
     },
