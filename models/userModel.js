@@ -1,8 +1,5 @@
 const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose')
-// const {InvalidCredentials, TokenExpired, Unauthorized} = require('../errors')
-
-
 
 const usersSchema = new mongoose.Schema({
 
@@ -33,8 +30,7 @@ const usersSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    min: 6,
-    max: 64
+
   },
   role: {
     type: String,

@@ -14,7 +14,7 @@ const createUsers = async () => {
 
     })
 
-    console.log(`DONE! ${users.length} USERS HAS BEEN INSERTED INTO DB.`);
+    console.log(`DONE! ${users.length} USERS HAVE BEEN INSERTED INTO DB.`);
 
 }
 
