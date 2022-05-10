@@ -9,14 +9,15 @@ const { createMessage, getMessageByTask,getALLmessages, deleteMessage } = requir
 const { getAllUser, getAllWorkers, getAllClients, updateUser, deleteUser } = require('../controllers/userControllers')
 const { requireAuthAdmin, requireAuthUser,requireAuthAdminWorker} = require('../middleware/auth')
 const {imageUpload} = require('../middleware/images')
+const validation = require('../middleware/validator')
 
 
 
 
 // Post requests
-router.post('/register',requireAuthAdmin, register)
-router.post('/login', login)
-router.post('/task',requireAuthAdminWorker,imageUpload,createTask)
+router.post('/register',requireAuthAdmin,validation.register,register)
+router.post('/login',validation.login, login)
+router.post('/task',requireAuthAdminWorker,imageUpload,validation.createTask,createTask)
 router.post('/message',requireAuthUser, createMessage)
 
 
@@ -32,8 +33,8 @@ router.get('/task/:id/', getMessageByTask)
 
 
 // Update requests
-router.patch('/userUpdate', requireAuthUser ,updateUser)
-router.patch('/taskUpdate', requireAuthAdminWorker,imageUpload ,updateTask)
+router.patch('/userUpdate', requireAuthUser , validation.updateProfile, updateUser)
+router.patch('/taskUpdate', requireAuthAdminWorker,imageUpload ,validation.updateTask, updateTask)
 
 
 // Delete requests

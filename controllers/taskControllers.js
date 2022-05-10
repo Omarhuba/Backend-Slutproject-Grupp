@@ -1,7 +1,7 @@
 
 const { Task } = require("../models/taskModel");
 const { User } = require("../models/userModel");
-
+const { TaskNotFound } = require('../error')
 
 const createTask = async (req, res) => {
   try {
@@ -9,9 +9,9 @@ const createTask = async (req, res) => {
     // console.log(req.body);
     const { id } = req.user
 
-    let originalname = ''
+    let filename = ''
     if (req.file) {
-      originalname = req.file.originalname
+      filename = req.file.filename
     }
     console.log(req.file)
 
@@ -28,7 +28,7 @@ const createTask = async (req, res) => {
 
     })
 
-    await task.image.push(originalname)
+    await task.image.push(filename)
 
     await task.save();
     res.json({ task, message: 'A new task created!' })
@@ -52,6 +52,7 @@ const getTaskByWorker = async (req, res) => {
   try {
     const id = req.params.id
     const tasks = await Task.find({ worker_id: id }).exec()
+    if(tasks.length < 1 ){ throw new TaskNotFound(id)}
     res.json(tasks)
   } catch (error) {
     res.status(400).json(error.message);;
@@ -65,7 +66,7 @@ const updateTask = async (req, res) => {
     let { title, status } = req.body
 
     const task = await Task.findOne({ title })
-
+    if(!task ){ throw new TaskNotFound(title)}
     if (status == 'finished') {
       task.status = status
       task.finishedAt = new Date()
@@ -74,7 +75,7 @@ const updateTask = async (req, res) => {
     }
 
     if (req.file) {
-      task.image.push(req.file.originalname)
+      task.image.push(req.file.filename)
     }
 
     await task.save()
@@ -89,8 +90,8 @@ const updateTask = async (req, res) => {
 const deleteTask = async (req, res) => {
   try {
     const { title } = req.body
-    await Task.deleteOne({ title })
-
+   const task =  await Task.findOneAndDelete({ title })
+    if(!task ){ throw new TaskNotFound(title)}
     res.json('task deleted!')
   } catch (error) {
     res.status(400).json(error.message);
