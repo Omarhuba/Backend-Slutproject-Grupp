@@ -58,6 +58,5 @@ module.exports = {
   TokenExpired,
   TaskNotFound,
   Forbidden,
-  InvalidFile,
   // FileExists
 }
