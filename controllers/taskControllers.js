@@ -9,9 +9,9 @@ const createTask = async (req, res) => {
     // console.log(req.body);
     const { id } = req.user
 
-    let originalname = ''
+    let filename = ''
     if (req.file) {
-      originalname = req.file.originalname
+      filename = req.file.filename
     }
     console.log(req.file)
 
@@ -28,7 +28,7 @@ const createTask = async (req, res) => {
 
     })
 
-    await task.image.push(originalname)
+    await task.image.push(filename)
 
     await task.save();
     res.json({ task, message: 'A new task created!' })
@@ -75,7 +75,7 @@ const updateTask = async (req, res) => {
     }
 
     if (req.file) {
-      task.image.push(req.file.originalname)
+      task.image.push(req.file.filename)
     }
 
     await task.save()
