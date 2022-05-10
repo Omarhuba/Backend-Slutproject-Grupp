@@ -33,9 +33,9 @@ class Forbidden extends byggFirmaError{
 // }
 
 class TaskNotFound extends byggFirmaError{
-  constructor(_id){
+  constructor(){
     super()
-    this.message = `Taks with id ${_id} not found`
+    this.message = `Taks with data provided not found`
     this.errorCode = 404
   }
 }
