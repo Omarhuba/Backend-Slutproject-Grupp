@@ -10,6 +10,7 @@ const { getAllUser, getAllWorkers, getAllClients, updateUser, deleteUser } = req
 const { requireAuthAdmin, requireAuthUser,requireAuthAdminWorker} = require('../middleware/auth')
 const {imageUpload} = require('../middleware/images')
 const validation = require('../middleware/validator')
+const {allImages} = require('../controllers/imageControllers')
 
 
 
@@ -29,6 +30,7 @@ router.get('/tasks', requireAuthAdmin, getAllTasks)
 router.get('/taskByWorker/:id', requireAuthUser, getTaskByWorker)
 router.get('/messages', requireAuthAdmin, getALLmessages)
 router.get('/task/:id/', getMessageByTask)
+router.get('/allImages',requireAuthAdmin, allImages)
 
 
 
