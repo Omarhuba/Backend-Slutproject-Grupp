@@ -40,14 +40,7 @@ class TaskNotFound extends byggFirmaError{
   }
 }
 
-// // FINDDDDDD....
-class InvalidFile extends byggFirmaError{
-  constructor(message){
-    super()
-    this.message = message
-    this.errorCode = 400
-  }
-}
+
 
 // // FINNNDDDDD....
 // class FileExists extends byggFirmaError{

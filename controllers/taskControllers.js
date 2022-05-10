@@ -3,17 +3,22 @@ const { Task } = require("../models/taskModel");
 const { User } = require("../models/userModel");
 const { TaskNotFound } = require('../error')
 
+
 const createTask = async (req, res) => {
   try {
-    const { title, desc, done, clientEmail, finishedAt } = req.body;
+    const { title, desc, clientEmail, finishedAt } = req.body;
     // console.log(req.body);
     const { id } = req.user
 
     let filename = ''
-    if (req.file) {
+
+    if (req.file && !req.fileError) {
       filename = req.file.filename
     }
-    console.log(req.file)
+
+    if(req.fileError) {
+      throw new Error(req.fileError)
+    }
 
 
     const user = await User.findById({ _id: id }).select("-password")
@@ -22,13 +27,14 @@ const createTask = async (req, res) => {
     const task = await new Task({
       title,
       desc,
+      image:filename,
       worker_id: user._id,
       client_id: client._id,
       finishedAt
 
     })
 
-    await task.image.push(filename)
+    // await task.image.push(filename)
 
     await task.save();
     res.json({ task, message: 'A new task created!' })
@@ -74,9 +80,15 @@ const updateTask = async (req, res) => {
       task.status
     }
 
-    if (req.file) {
-      task.image.push(req.file.filename)
+
+    if (req.file && !req.fileError) {
+      task.image = req.file.filename
     }
+
+    if(req.fileError) {
+      throw new Error(req.fileError)
+    }
+
 
     await task.save()
 
