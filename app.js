@@ -7,6 +7,8 @@ const {byggfirmaDB}= require("./database/connection")
 const morgan = require('morgan')
 require('dotenv').config()
 
+app.use(express.static("public"));
+app.set("view engine", "ejs");
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
@@ -20,13 +22,24 @@ app.use(session({
 
 // websocket
 
+const http = require('http')
+const { Server } = require('socket.io')
+const server = http.createServer(app)
+const io = new Server(server)
+const { socketAuth, socketConnection } = require('./controllers/socket/socketControllers')
+
+io.use(socketAuth)
+.on('connection', socketConnection)
+
 
 // routers
 
 readdirSync('./routes').map((route) => app.use('/api', require(`./routes/${route}`)))
 
 
-
+app.get('/', (req, res) => {
+    res.render('pages/chat')
+})
 
 
 
