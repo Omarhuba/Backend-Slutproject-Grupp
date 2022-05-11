@@ -7,11 +7,8 @@ const {allImages, getImageByTask} = require('../controllers/imageControllers')
 const { requireAuthAdmin, requireAuthUser} = require('../middleware/auth')
 
 
-
-
-
 router.get('/allImages',requireAuthAdmin, allImages)
-router.get('?query=627bb816b8fbd527335d7998', requireAuthUser,getImageByTask)
+router.get('/imageByTaskId', requireAuthUser,getImageByTask)//req.query.id
 
 
 module.exports = router

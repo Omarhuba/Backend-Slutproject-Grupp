@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const {Task}= require('../models/taskModel')
-
+const { Task } = require('../models/taskModel')
 
 
 const allImages = (req, res) => {
@@ -13,18 +12,18 @@ const allImages = (req, res) => {
 
         });
         res.json(images)
-    } catch (error) {
+    } catch (error) {q
         res.status(404).json(error.message)
     }
 
 }
 
-const getImageByTask = async (req, res) => {
 
-    const { query } = req.query
-  console.log(query);
-    const task = await Task.findOne({ _id: query })
-    res.sendFile(task.image,{root:'assets/images'})
+const getImageByTask = async (req, res) => {
+    const { id } = req.query
+    console.log(req.query);
+    const task = await Task.findOne({_id: id })
+    res.sendFile(task.image, { root: 'assets/images' })
 
 }
 

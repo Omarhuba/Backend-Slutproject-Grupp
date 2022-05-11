@@ -56,13 +56,12 @@ const getTaskByUser = async (req, res) => {
   try {
     const id = req.params.id
     const user = await User.findOne({ _id: id })
-    console.log(user);
     if (user.role == 'worker' || user.role == 'admin') {
       const tasks = await Task.find({ creator_id: user._id }).exec()
       if (tasks.length < 1) { throw new TaskNotFound(id) }
       res.json(tasks)
     } else {
-      const tasks = await Task.find({ client_id  : user._id }).exec()
+      const tasks = await Task.find({ client_id: user._id }).exec()
       if (tasks.length < 1) { throw new TaskNotFound(id) }
       res.json(tasks)
     }
