@@ -7,7 +7,7 @@ const { TaskNotFound } = require('../error')
 const createTask = async (req, res) => {
   try {
     const { title, desc, clientEmail, finishedAt } = req.body;
-    // console.log(req.body);
+  
     const { id } = req.user
 
     let filename = ''
@@ -16,7 +16,7 @@ const createTask = async (req, res) => {
       filename = req.file.filename
     }
 
-    if(req.fileError) {
+    if (req.fileError) {
       throw new Error(req.fileError)
     }
 
@@ -27,14 +27,13 @@ const createTask = async (req, res) => {
     const task = await new Task({
       title,
       desc,
-      image:filename,
-      worker_id: user._id,
+      image: filename,
+      creator_id: user._id,
       client_id: client._id,
       finishedAt
 
     })
 
-    // await task.image.push(filename)
 
     await task.save();
     res.json({ task, message: 'A new task created!' })
@@ -50,16 +49,23 @@ const getAllTasks = async (req, res) => {
   } catch (error) {
     res.status(400).json(error.message);;
   }
-
 }
 
-// ???
-const getTaskByWorker = async (req, res) => {
+
+const getTaskByUser = async (req, res) => {
   try {
     const id = req.params.id
-    const tasks = await Task.find({ worker_id: id }).exec()
-    if(tasks.length < 1 ){ throw new TaskNotFound(id)}
-    res.json(tasks)
+    const user = await User.findById({ _id: id })
+    if (user.role = 'worker' || user.role == 'admin') {
+      const tasks = await Task.find({ creator_id: id }).exec()
+      if (tasks.length < 1) { throw new TaskNotFound(id) }
+      res.json(tasks)
+    } else {
+      const tasks = await Task.find({ client_id: id }).exec()
+      if (tasks.length < 1) { throw new TaskNotFound(id) }
+      res.json(tasks)
+    }
+
   } catch (error) {
     res.status(400).json(error.message);;
   }
@@ -72,7 +78,7 @@ const updateTask = async (req, res) => {
     let { title, status } = req.body
 
     const task = await Task.findOne({ title })
-    if(!task ){ throw new TaskNotFound(title)}
+    if (!task) { throw new TaskNotFound(title) }
     if (status == 'finished') {
       task.status = status
       task.finishedAt = new Date()
@@ -85,7 +91,7 @@ const updateTask = async (req, res) => {
       task.image = req.file.filename
     }
 
-    if(req.fileError) {
+    if (req.fileError) {
       throw new Error(req.fileError)
     }
 
@@ -102,8 +108,8 @@ const updateTask = async (req, res) => {
 const deleteTask = async (req, res) => {
   try {
     const { title } = req.body
-   const task =  await Task.findOneAndDelete({ title })
-    if(!task ){ throw new TaskNotFound(title)}
+    const task = await Task.findOneAndDelete({ title })
+    if (!task) { throw new TaskNotFound(title) }
     res.json('task deleted!')
   } catch (error) {
     res.status(400).json(error.message);
@@ -112,5 +118,4 @@ const deleteTask = async (req, res) => {
 
 
 
-
-module.exports = { createTask, getAllTasks, getTaskByWorker, deleteTask, updateTask };
+module.exports = { createTask, getAllTasks, getTaskByUser, deleteTask, updateTask };

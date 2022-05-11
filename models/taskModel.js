@@ -21,7 +21,7 @@ const taskSchema = new mongoose.Schema(
     status: { type: String,enum:['work-in-progress','finished'], default: 'work-in-progress'},
 
     // ??
-    worker_id: {
+    creator_id: {
       type: String
     },
     client_id: {
