@@ -5,7 +5,6 @@ const { User } = require('../models/userModel')
 const getUser = async (req, res) => {
     try {
         const { role } = req.query
-        console.log('Query ', req.query);
        const allUsers = await User.find({}).exec()
         if (role) {
         const userByRole = allUsers.filter(user => user.role == role)

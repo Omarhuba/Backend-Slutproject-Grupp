@@ -9,9 +9,9 @@ const { getUser,  updateUser, deleteUser } = require('../controllers/userControl
 const validation = require('../middleware/validator')
 
 
-router.get('/allUsers', requireAuthAdmin, getUser)
-router.get('/allWorkers?role=worker', requireAuthAdmin, getUser)
-router.get('/allClients?role=client', requireAuthAdmin, getUser)
+router.get('/allUsers', requireAuthAdmin, getUser) //req.query
+router.get('/allWorkers', requireAuthAdmin, getUser) //req.quer
+router.get('/allClients', requireAuthAdmin, getUser) //req.query
 router.patch('/updateUser', requireAuthUser, validation.updateProfile, updateUser)
 router.delete('/deletUser', requireAuthAdmin ,deleteUser)
 
