@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const {Task}= require('../models/taskModel')
 
 
 
@@ -16,7 +17,15 @@ const allImages = (req, res) => {
         res.status(404).json(error.message)
     }
 
+}
+
+const getImageByTask = async (req, res) => {
+
+    const { query } = req.query
+  
+    const task = await Task.findOne({ _id: query })
+    res.sendFile(task.image,{root:'assets/images'})
 
 }
 
-module.exports = { allImages }
+module.exports = { allImages, getImageByTask }

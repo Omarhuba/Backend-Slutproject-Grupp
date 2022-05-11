@@ -14,12 +14,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
-// cookie-session
-const session = require('cookie-session')
-app.use(session({
-    name: 'session',
-    keys: [process.env.SESSION_SECRET]
-}))
 
 // websocket
 

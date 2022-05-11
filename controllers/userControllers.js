@@ -2,10 +2,18 @@
 const { User } = require('../models/userModel')
 
 
-const getAllUser = async (req, res) => {
-   try{
+const getUser = async (req, res) => {
+    try {
+        const { role } = req.query
+        console.log('Query ', req.query);
        const allUsers = await User.find({}).exec()
-       res.json(allUsers)
+        if (role) {
+        const userByRole = allUsers.filter(user => user.role == role)
+        res.json(userByRole)
+        } else {
+            res.json(allUsers)
+        }
+
    } catch (error)
    {
        res.status(400).json(error.message);
@@ -13,29 +21,6 @@ const getAllUser = async (req, res) => {
 }
 
 
-const getAllWorkers = async (req, res) => {
-    try{
-        const allWorker = await User.find({role:'worker'}).exec()
-        res.json(allWorker)
-    } catch (error)
-    {
-        res.status(400).json(error.message);
-    }
-
-
-}
-
-
-const getAllClients = async (req, res) => {
-    try{
-        const allClients = await User.find({role:'client'}).exec()
-        res.json(allClients)
-    } catch (error)
-    {
-        res.status(400).json(error.message);;
-    }
-
-}
 
 const updateUser = async (req, res) => {
     try {
@@ -67,9 +52,6 @@ const deleteUser = async (req, res)=>{
     try{
         const {email} = req.body
         await User.deleteOne({email})
-        // const userDelete = await User.find({}).exec()
-
-        // await userDelete.save()
         res.json('user deleted!')
     }catch(error){
         res.status(400).json(error.message);
@@ -80,4 +62,4 @@ const deleteUser = async (req, res)=>{
 
 
 
-module.exports={getAllUser, getAllWorkers, getAllClients,updateUser, deleteUser}
+module.exports={getUser, updateUser, deleteUser}
