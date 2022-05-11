@@ -3,3 +3,4 @@ Q2.Which dataTypes would be for image file(DB)?
 Q3. is upload image must required?
 
 
+updatera task måste ändra oxå en bild som är required
