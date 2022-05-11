@@ -7,7 +7,7 @@ const { TaskNotFound } = require('../error')
 const createTask = async (req, res) => {
   try {
     const { title, desc, clientEmail, finishedAt } = req.body;
-  
+
     const { id } = req.user
 
     let filename = ''
@@ -55,13 +55,14 @@ const getAllTasks = async (req, res) => {
 const getTaskByUser = async (req, res) => {
   try {
     const id = req.params.id
-    const user = await User.findById({ _id: id })
-    if (user.role = 'worker' || user.role == 'admin') {
-      const tasks = await Task.find({ creator_id: id }).exec()
+    const user = await User.findOne({ _id: id })
+    console.log(user);
+    if (user.role == 'worker' || user.role == 'admin') {
+      const tasks = await Task.find({ creator_id: user._id }).exec()
       if (tasks.length < 1) { throw new TaskNotFound(id) }
       res.json(tasks)
     } else {
-      const tasks = await Task.find({ client_id: id }).exec()
+      const tasks = await Task.find({ client_id  : user._id }).exec()
       if (tasks.length < 1) { throw new TaskNotFound(id) }
       res.json(tasks)
     }

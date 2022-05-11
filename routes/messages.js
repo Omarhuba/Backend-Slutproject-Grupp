@@ -1,5 +1,7 @@
-const express = require('express')
-const router = express.Router()
+// const express = require('express')
+// const router = express.Router()
+const {Router} = require('express')
+const router = new Router()
 
 const { createMessage, getMessageByTask,getALLmessages, deleteMessage } = require('../controllers/messageControll')
 const { requireAuthAdmin, requireAuthUser,requireAuthAdminWorker} = require('../middleware/auth')

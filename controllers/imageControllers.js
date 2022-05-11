@@ -22,7 +22,7 @@ const allImages = (req, res) => {
 const getImageByTask = async (req, res) => {
 
     const { query } = req.query
-  
+  console.log(query);
     const task = await Task.findOne({ _id: query })
     res.sendFile(task.image,{root:'assets/images'})
 

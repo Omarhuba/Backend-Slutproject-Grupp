@@ -1,9 +1,9 @@
 const express = require('express')
-const app = express()
+const routes = require('./routes')
 const { byggfirmaDB } = require("./database/connection")
 const { errorHandler } = require('./middleware/errorHandler')
-const routes = require('./routes')
 
+const app = express()
 
 const morgan = require('morgan')
 require('dotenv').config()
