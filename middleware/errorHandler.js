@@ -1,8 +1,8 @@
 const {byggFirmaError} = require('../error')
 const {MongooseError} = require('mongoose')
 
-module.exports = {
-  errorHandler(error, req, res, next){
+
+const errorHandler = (error, req, res, next)=>{
     if( error instanceof byggFirmaError){
       res
         .status(error.errorCode)
@@ -22,4 +22,5 @@ module.exports = {
         .json({error: 'Something went wrong, please contact your system admin'})
     }
   }
-}
+
+  module.exports = {errorHandler}

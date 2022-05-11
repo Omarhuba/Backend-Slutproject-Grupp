@@ -54,8 +54,8 @@ module.exports = {
 
 
     createTask: validator([
-        body('title').isLength({ min: 3 })
-            .withMessage('Title must be 3 chars long!'),
+        body('title').isLength()
+            .withMessage('min 3 characters!'),
         body('desc').exists()
             .withMessage('description missing'),
         body('clientEmail').isEmail()
