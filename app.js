@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
-const { readdirSync } = require('fs')
 const { byggfirmaDB } = require("./database/connection")
-const{errorHandler} = require('./middleware/errorHandler')
+const { errorHandler } = require('./middleware/errorHandler')
+const routes = require('./routes')
 
 
 const morgan = require('morgan')
@@ -15,12 +15,18 @@ app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
 
+
 // websocket
 
 
 // routers
 
-readdirSync('./routes').map((route) => app.use('/api', require(`./routes/${route}`)))
+app.use('/api', routes.auth)
+app.use('/api/user', routes.users)
+app.use('/api/task', routes.tasks)
+app.use('/api/message', routes.messages)
+app.use('/api/image', routes.images)
+
 
 // app.use(errorHandler)
 
