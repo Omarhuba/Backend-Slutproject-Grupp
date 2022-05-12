@@ -2,34 +2,34 @@
     {
         "name": "admin",
         "address": {
-                "street": "Årstaängsvägen",
-                "city": "stockholm",
-                "zip": "11743"
-        } ,
+            "street": "Årstaängsvägen",
+            "city": "stockholm",
+            "zip": "11743"
+        },
         "email": "admin@example.com",
         "password": "password",
-        "role":  "admin"
+        "role": "admin"
     },
     {
         "name": "worker",
         "address": {
-                "street": "tokivägen",
-                "city": "stockholm",
-                "zip": "12345"
-        } ,
+            "street": "tokivägen",
+            "city": "stockholm",
+            "zip": "12345"
+        },
         "email": "worker@example.com",
         "password": "password",
-        "role":  "worker"
+        "role": "worker"
     },
     {
         "name": "client",
         "address": {
-                "street": "snyggvägen",
-                "city": "stockholm",
-                "zip": "12347"
-        } ,
+            "street": "snyggvägen",
+            "city": "stockholm",
+            "zip": "12347"
+        },
         "email": "client@example.com",
         "password": "password",
-        "role":  "client"
+        "role": "client"
     }
 ]

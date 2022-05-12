@@ -1,25 +1,18 @@
+const { User } = require("../models/userModel");
+const { byggfirmaDB } = require("./connection");
 
-const { User } = require('../models/userModel')
-const { byggfirmaDB } = require('./connection')
-
-const users = require('./user.json')
+const users = require("./user.json");
 
 const createUsers = async () => {
+  await User.deleteMany({});
 
-    await User.deleteMany({})
+  users.forEach(async (user) => {
+    const newUsers = await new User(user);
+    await newUsers.save();
+  });
 
-    users.forEach(async (user) => {
-        const newUsers = await new User(user)
-        await newUsers.save()
+  console.log(`DONE! ${users.length} USERS HAVE BEEN INSERTED INTO DB.`);
+};
 
-    })
-
-    console.log(`DONE! ${users.length} USERS HAVE BEEN INSERTED INTO DB.`);
-
-}
-
-byggfirmaDB()
-createUsers()
-
-
-
+byggfirmaDB();
+createUsers();
