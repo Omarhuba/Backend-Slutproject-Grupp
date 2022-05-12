@@ -28,7 +28,7 @@ app.use('/api/message', routes.messages)
 app.use('/api/image', routes.images)
 
 
-// app.use(errorHandler)
+app.use(errorHandler)
 
 
 

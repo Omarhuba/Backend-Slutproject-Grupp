@@ -41,16 +41,6 @@ class TaskNotFound extends byggFirmaError{
 }
 
 
-
-// // FINNNDDDDD....
-// class FileExists extends byggFirmaError{
-//   constructor(fileName){
-//     super()
-//     this.message = fileName + " already exists. Please change the name and upload again"
-//     this.errorCode = 500
-//   }
-// }
-
 module.exports = {
   byggFirmaError,
   InvalidCredentials,
@@ -58,5 +48,5 @@ module.exports = {
   TokenExpired,
   TaskNotFound,
   Forbidden,
-  // FileExists
+  
 }
