@@ -1,4 +1,6 @@
-![poster](./poster.png)
+![poster](./public/assets/poster.png)
+# Diagram
+![diagram](./public/assets/ER-diagram-1.png)
 # Inge Bra Bygg AB
 **Ärende och kommunikationsplattform mellan byggare och kunder för byggfirman Inge Bra Bygg AB.**
 
