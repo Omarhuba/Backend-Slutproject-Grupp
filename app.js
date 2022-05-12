@@ -29,3 +29,4 @@ app.listen(PORT, () => {
   byggfirmaDB();
   console.log(`SERVER STARTED ON PORT: ${PORT}`);
 });
+// All is done
