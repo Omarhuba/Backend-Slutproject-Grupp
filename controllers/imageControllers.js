@@ -12,7 +12,7 @@ const allImages = (req, res) => {
 
         });
         res.json(images)
-    } catch (error) {q
+    } catch (error) {
         res.status(404).json(error.message)
     }
 

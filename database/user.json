@@ -24,7 +24,7 @@
     {
         "name": "client",
         "address": {
-                "street": "tokivägen",
+                "street": "snyggvägen",
                 "city": "stockholm",
                 "zip": "12347"
         } ,

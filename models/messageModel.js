@@ -2,12 +2,12 @@ const mongoose = require('mongoose')
 const messageSchema = new mongoose.Schema(
   {
     sender_id: {
-    type:Object,
+      type: Object,
       required: true
     },
 
     task_id: {
-        type:String,
+      type: String,
       required: true
     },
 
@@ -23,4 +23,4 @@ const messageSchema = new mongoose.Schema(
 
 const Message = mongoose.model('Message', messageSchema)
 
-module.exports = { Message}
+module.exports = { Message }
