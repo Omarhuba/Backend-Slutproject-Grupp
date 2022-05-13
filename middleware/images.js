@@ -5,19 +5,13 @@ let storage = multer.diskStorage({
     cb(null, "assets/images");
   },
   filename: function (req, file, cb) {
-    const mimeExtension = {
-      "image/png": ".png",
-      "image/svg": ".svg",
-      "image/jpg": ".jpg",
-      "image/jepg": ".jepg",
-    };
-    cb(
-      null,
-      file.originalname.split(".")[0] +
-        "." +
-        Date.now() +
-        mimeExtension[file.mimetype]
-    );
+    let [first, last] = file.originalname.split(".");
+    
+    if (last == "svg+xml") {
+      last = "svg";
+    }
+
+    cb(null, first + "." + Date.now() + "." + last);
   },
 });
 
@@ -27,8 +21,9 @@ const imageUpload = multer({
     if (
       file.mimetype === "image/png" ||
       file.mimetype === "image/svg" ||
+      file.mimetype === "image/svg+xml" ||
       file.mimetype === "image/jpg" ||
-      file.mimetype === "image/jepg"
+      file.mimetype === "image/jpeg"
     ) {
       cb(null, true);
     } else {
