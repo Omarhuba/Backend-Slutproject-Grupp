@@ -19,12 +19,18 @@ const updateUser = async (req, res) => {
   try {
     const data = Object.keys(req.body);
     const { _id } = req.user;
-
     const user = await User.findById({ _id }).select("-password");
+
+    // Check email existence
+    const allUsers = await User.find({}).exec();
+    const emailExist = allUsers.some((user => user.email == req.body.email));
+
+    if (emailExist) {
+      throw new Error("Email already exist!");
+    }
 
     data.forEach((key) => {
       if (key && key !== "role") {
-        console.log(key);
         user[key] = req.body[key];
       }
     });
